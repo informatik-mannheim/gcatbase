@@ -7,7 +7,7 @@ pub mod tuples;
 /// @example `codons = tuples(3)`
 /// @export
 #[extendr]
-fn tuples(n: u16) -> Vec<String> {
+fn all_tuples(n: u16) -> Vec<String> {
     use tuples::all_nuc_tuples;
     all_nuc_tuples(n)
 }
@@ -48,6 +48,6 @@ pub fn test_demo() -> Vec<i32> {
 extendr_module! {
     mod gcatbase; // like R package name
     impl Counter;
-    fn tuples;
+    fn all_tuples;
     fn test_demo;
 }

@@ -11,8 +11,8 @@ output:
 Under construction.
 
 ```{r}
-library(gcatbase)
-#devtools::load_all()
+#library(gcatbase)
+devtools::load_all(".")
 ```
 
 # Sequence, tuple and codon representations
@@ -22,7 +22,7 @@ Tuples can be created with the `tuples` function.
 (`rextendr` does not have parameter names, does it?)
 
 ```{r}
-codons = tuples(3)
+codons = all_tuples(3)
 print(codons)
 ```
 
@@ -44,18 +44,22 @@ Note: a tuple or a codon is a special case of a nucleotide sequence.
 
 # Codes
 
-Codes are created with the `code` function.
+## Create codes (`code`)
+
+Codes are created with the `code` function. If the tuples passed to `code` are not unique they are made unique.
 
 ```{r}
-X = code(tuples = c("AUG", "GCG"), id = "A code")
+# Non unique tuple set:
+X = code(tuples = c("ATG", "GCG", "ATG"), id = "A code")
 ```
 
 This will return an object of type `gcat.code`. The attributes are:
 
  * `id`: a short identifier for this code.
- * `tuples`: vector of tuples.
+ * `tuples`: unique vector of tuples.
  * `tsize`: tuple size (e.g. 3 if codons)
 
+Note that the code is now unique. The elements are sorted.
 ```{r}
 print(X)
 ```
@@ -66,12 +70,82 @@ In particular for codons the `summary` function is available.
 print(summary(X))
 ```
 
-# Manipulation of sequences, tuples and codons
+## Random codes (`random.code`)
+
+It is also possible to create random codes.
 
 ```{r}
-X2 = code(shift(1, X$tuples), "shifted code")
+Xr = random.code(size = 10, tsize = 4)
+print(Xr)
+```
+
+## Persisting codes in a text file
+
+Codes can be written to and read from a file.
+
+```{r}
+write.codes(filename = "codes.txt", codes = list(X))
+```
+
+```{r}
+X2 = read.codes("codes.txt")
 print(X2)
 ```
 
-# Amino acids
 
+# Manipulation of sequences, tuples and codons
+
+## Tuples from a sequence
+
+```{r}
+seq = "ATCATGACGGCGCGGAGGATAGCGAGCAGGT"
+t = gcatbase::split(seq, 3)
+print(t)
+```
+
+Next we want to calculate the tuple usage. `tuples.usage` creates a data frame.
+```{r}
+u = tuples.freq(t)
+print(head(u, 10))
+```
+
+Make a code from the sequence. Note that `code` makes the tuples unique:
+```{r}
+X2 = code(t, "Code from seq.")
+print(X2)
+```
+
+## Shift tuples
+
+```{r}
+X2s = code(shift(1, X2$tuples), "shifted code")
+print(X2s)
+```
+
+## Strip complements
+
+```{r eval=F}
+strip_complements(X)
+```
+
+## Classify sequence according to a code
+
+```{r}
+h = classify(seq, X)
+print(h)
+```
+
+From this we can derive the code usage $u$ (in %)
+```{r}
+u = length(h[h == 1]) / length(h)
+print(u)
+```
+
+or use the convenient function `code.usage`:
+
+```{r}
+u = code.usage(seq, X)
+print(u)
+```
+
+# Amino acids
