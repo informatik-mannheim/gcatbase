@@ -4,7 +4,9 @@
 *.so
 *.dll
 *.lock
+*-tmp.*
 *.nb.html
+Tutorial.html
 .Rbuildignore
 extendr-wrappers.R
 settings.json

@@ -11,7 +11,9 @@ Authors@R:
            family = "Starman",
            role = c("aut", "cre"),
            email = "m.starman@live.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))           
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Depends: R (>= 3.6.0), seqinr
+Suggests: testthat
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license

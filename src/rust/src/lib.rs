@@ -2,9 +2,12 @@ use extendr_api::prelude::*;
 
 pub mod tuples;
 
+/// Create all tuples of size `n`.
+/// @param n Tuple size (e.g. 3 for codons)
+/// @example `codons = tuples(3)`
 /// @export
 #[extendr]
-fn all_tuples(n: u16) -> Vec<String> {
+fn tuples(n: u16) -> Vec<String> {
     use tuples::all_nuc_tuples;
     all_nuc_tuples(n)
 }
@@ -45,6 +48,6 @@ pub fn test_demo() -> Vec<i32> {
 extendr_module! {
     mod gcatbase; // like R package name
     impl Counter;
-    fn all_tuples;
+    fn tuples;
     fn test_demo;
 }

@@ -1,0 +1,77 @@
+---
+title: "GCAT base tutorial"
+author: Markus Gumbel
+date: "`r format(Sys.time(), '%d. %B %Y')`"
+output:
+ html_document:
+  toc: true
+  number_sections: true 
+---
+
+Under construction.
+
+```{r}
+library(gcatbase)
+#devtools::load_all()
+```
+
+# Sequence, tuple and codon representations
+
+Tuples can be created with the `tuples` function.
+
+(`rextendr` does not have parameter names, does it?)
+
+```{r}
+codons = tuples(3)
+print(codons)
+```
+
+There are many ways to represent nucleotide sequences and codons or tuples in general:
+
+ * DNA or RNA?
+ * letters in lower- or upper-case?
+ * Sequences as string or as vector of characters?
+
+ `gcat-base` offers functions to convert the representation. The default representation is DNA in upper-case.
+
+`normalize` converts a sequence or a vector of sequences (e.g. codons) to a specified representation.
+```{r eval=F}
+rna_codons = normalize(codons, nuc = "RNA", lowercase = T)
+print(rna_codons)
+```
+
+Note: a tuple or a codon is a special case of a nucleotide sequence.
+
+# Codes
+
+Codes are created with the `code` function.
+
+```{r}
+X = code(tuples = c("AUG", "GCG"), id = "A code")
+```
+
+This will return an object of type `gcat.code`. The attributes are:
+
+ * `id`: a short identifier for this code.
+ * `tuples`: vector of tuples.
+ * `tsize`: tuple size (e.g. 3 if codons)
+
+```{r}
+print(X)
+```
+
+In particular for codons the `summary` function is available.
+
+```{r}
+print(summary(X))
+```
+
+# Manipulation of sequences, tuples and codons
+
+```{r}
+X2 = code(shift(1, X$tuples), "shifted code")
+print(X2)
+```
+
+# Amino acids
+
