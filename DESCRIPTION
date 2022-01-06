@@ -7,16 +7,12 @@ Authors@R:
            role = c("aut", "cre"),
            email = "m.gumbel@hs-mannheim.de",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-    person(given = "Martin",
-           family = "Starman",
-           role = c("aut", "cre"),
-           email = "m.starman@live.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Author: Markus Gumbel [aut, cre], Martin Starman [aut, cre]
+Maintainer: Markus Gumbel <m.gumbel@hs-mannheim.de>
 Depends: R (>= 3.6.0), seqinr
 Suggests: testthat
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: Apache License, Version 2.0
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

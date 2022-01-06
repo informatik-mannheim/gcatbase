@@ -165,6 +165,50 @@ Also, we can ask what amino acids are used by a code. Here the Vertebrate Mitoch
 print(amino.acids(X, numcode = 2)) # generic for amino.acids(X$tuples)
 ```
 
+# Operations over lists
+
+Sometimes it is needed to perform some operations over entries in a Fasta file.
+
+We want to count the tuples in a Fasta record. First, the file is read:
+```{r}
+fasta = seqinr::read.fasta("../data/ena-sars.fasta", as.string = TRUE, forceDNAtolower = FALSE)
+```
+
+A typical question is the frequencies of all codons in the Fasta file. The following code calculates the frequencies:
+
+```{r}
+# Generic iteration
+ntuples = sapply(fasta, function(f) {
+  seq = as.character(f)
+  gcatbase::split(seq) # individual operation
+})
+tuples = unlist(ntuples)
+
+# Now the analysis:
+freq = tuples.freq(tuples)
+print(head(freq))
+```
+
+This pattern is implemented in GCAT's `flatten` function. The first paramter is the list (here the Fasta file) and the second the function (operator) to be applied (here the split function).
+
+```{r}
+codons = gcatbase::flatten(fasta, gcatbase::split)
+freq = tuples.freq(codons)
+print(head(freq))
+```
+
+Of course, this is also possible for quadrupels in frame 1.
+```{r}
+op = function(seq) {
+  seq1 = truncate(seq, 1) # Frame 1
+  gcatbase::split(seq1, 4) # Make quadruples.
+}
+
+tuples4 = gcatbase::flatten(fasta, op)
+freq = tuples.freq(tuples4)
+print(head(freq))
+```
+
 # Appendix
 
 ```{r}

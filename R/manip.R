@@ -45,3 +45,14 @@ split = function(seq, tsize = 3) {
   # chop it up:
   sapply(starts, function(ii) substr(seq, ii, ii + (tsize - 1)))
 }
+
+#' Truncate a string at the beginning.
+#' 
+#' This is useful for a frame shift.
+#' 
+#' @param k Characters to truncate: 0, 1, 2, etc.
+#' @return String or sequence where k nucleotides are truncated at the beginning.
+#' @export
+truncate = function(seq, k) {
+  substr(seq, 1 + k, nchar(seq))
+}
