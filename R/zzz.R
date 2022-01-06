@@ -11,12 +11,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License. 
 
-# Test file
-library(testthat)
+#' @author Markus Gumbel
 
-context("codes") # Infos
-
-test_that("Code", {
-  X = code(tuples = c("AUG", "GCG"), id = "A code")
-  expect_equal(X$id, "A code")
-})
+#' Init library.
+#'
+#' @param libname 
+#' @param pkgname 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+.onLoad = function(libname, pkgname) {
+  # empty
+}

@@ -2,6 +2,8 @@
 title: "GCAT base tutorial"
 author: Markus Gumbel
 date: "`r format(Sys.time(), '%d. %B %Y')`"
+params:
+  devel: TRUE
 output:
  html_document:
   toc: true
@@ -10,9 +12,12 @@ output:
 
 Under construction.
 
-```{r}
-#library(gcatbase)
+```{r include=params$devel, eval=params$devel}
 devtools::load_all(".")
+```
+
+```{r include=!params$devel, eval=!params$devel}
+library(gcatbase)
 ```
 
 # Sequence, tuple and codon representations
@@ -149,3 +154,13 @@ print(u)
 ```
 
 # Amino acids
+
+We can translate a vector of codons into amino acids:
+```{r}
+print(amino.acids(t))
+```
+
+Also, we can ask what amino acids are used by a code. Here the Vertebrate Mitochondrial Code (transl_table = 2) is used:
+```{r}
+print(amino.acids(X, numcode = 2)) # generic for amino.acids(X$tuples)
+```

@@ -1,3 +1,16 @@
+# Copyright 2021 by the authors.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+#  
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License. 
+
 #' Create a code from a list of tuples.
 #'
 #' @param tuples Vector of tuples or codons as strings, e.g. c("AUC", "GCA").
@@ -34,6 +47,20 @@ print.gcat.code = function(code) {
 summary.gcat.code = function(code) {
   s = "not implemented"
   summary.default(s)
+}
+
+#' Translate codons of a code into amino acids.
+#' 
+#' @param code A code with tuples of size 3.
+#' @param numcode The ncbi genetic code number for translation. 
+#' By default the standard genetic code (1) is used. 
+#' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
+#' @export 
+amino.acids.gcat.code = function(code, numcode) {
+  if (code$tsize != 3) {
+    stop("Tuple size must be 3 for amino acid translation!")
+  }
+  amino.acids.character(code$tuples, numcode)
 }
 
 #' Read one or more codes from file.
