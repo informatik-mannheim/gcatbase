@@ -1,12 +1,14 @@
-# Genetic Code Analysis Toolkit for R - Base package (gcat-base)
+# Genetic Code Analysis Toolkit for R - Base package (gcatbase)
 
-See ./examples/Tutorial.Rmd for an introduction.
+_under construction_
+
+See `./examples/Tutorial.Rmd` for an introduction.
 
 ## Installation
 
-## Development
+_under construction_
 
-_only Windows_
+## Development
 
 `devtools::build(binary = TRUE)` creates a local package with binaries (*.dll).
 
