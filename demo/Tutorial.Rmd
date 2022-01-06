@@ -164,3 +164,9 @@ Also, we can ask what amino acids are used by a code. Here the Vertebrate Mitoch
 ```{r}
 print(amino.acids(X, numcode = 2)) # generic for amino.acids(X$tuples)
 ```
+
+# Appendix
+
+```{r}
+print(test.demo()) # Rust function
+```
