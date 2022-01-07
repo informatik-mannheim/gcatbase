@@ -38,15 +38,28 @@ print.gcat.code = function(code) {
   print.default(s)
 }
 
-#' Pretty prints a code.
+#' Give a summary for a code.
 #'
 #' @param code
 #'
 #' @return
 #' @export
 summary.gcat.code = function(code) {
-  s = "not implemented"
-  summary.default(s)
+  n = length(code$tuples)
+  r = list(
+    paste0("Code: ", code$id),
+    paste0(n, " tuples: ", paste(code$tuples, collapse = ", "))
+  )
+  cat(r[[1]]); cat("\n")
+  cat(r[[2]])  
+  if (code$tsize == 3) {
+    aa = amino_acids(code$tuples)
+    na = length(aa)
+    r[[3]] = paste0(na, " amino acids: ", paste(aa, collapse = ", "))
+    cat("\n"); cat(r[[3]]) 
+  }
+  cat("\n")
+  return(invisible(NULL))
 }
 
 #' Translate codons of a code into amino acids.
@@ -56,11 +69,11 @@ summary.gcat.code = function(code) {
 #' By default the standard genetic code (1) is used. 
 #' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
 #' @export 
-amino.acids.gcat.code = function(code, numcode) {
+amino_acids.gcat.code = function(code, numcode) {
   if (code$tsize != 3) {
     stop("Tuple size must be 3 for amino acid translation!")
   }
-  amino.acids.character(code$tuples, numcode)
+  amino_acids.character(code$tuples, numcode)
 }
 
 #' Read one or more codes from file.
@@ -76,7 +89,7 @@ amino.acids.gcat.code = function(code, numcode) {
 #'
 #' @return
 #' @export
-read.codes = function(filename, tsize = 3,
+read_codes = function(filename, tsize = 3,
                       skip_codeid_col = TRUE) {
   # TODO: stringAsFactors does not work (bug?).
   # read.csv reads factors, which are later manually converted
@@ -109,7 +122,7 @@ read.codes = function(filename, tsize = 3,
 #' @param header Header of text file. Default is "# codes".
 #'
 #' @export
-write.codes = function(filename, codes, header = "# codes") {
+write_codes = function(filename, codes, header = "# codes") {
   write(header, filename)
   res = lapply(codes, function(c) {
     s = paste(c$id, ", ", toString(unlist(c$tuples)), sep = "")
@@ -125,7 +138,7 @@ write.codes = function(filename, codes, header = "# codes") {
 #'
 #' @return Vector or string based tuples.
 #' @export
-random.code = function(size = 20, tsize = 3,
+random_code = function(size = 20, tsize = 3,
                        id = "unkn. rnd") {
   bases = c("A", "T", "C", "G")
   l = rep(list(bases), tsize)
@@ -150,7 +163,7 @@ classify = function(seq, code) {
   })
 }
 
-code.usage = function(seq, code) {
+code_usage = function(seq, code) {
   h = gcatbase::classify(seq, code)
   length(h[h == 1]) / length(h)
 }

@@ -11,6 +11,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#' Vector of DNA nucleotide bases as characters.
+#' @export
+nuc_bases = function() c("A", "T", "C", "G")
+
+#' Create all tuples of size `n`.
+#' @param tsize Tuple size (e.g. 3 for codons)
+#' @param alphabet The alphabet. Default are DNA bases.
+#' @example `codons = all_tuples(3)`
+#* @export
+all_tuples = function(tsize, alphabet = nuc_bases()) {
+  r_all_tuples(tsize, alphabet)
+}
+
 #' Convert string into vector of characters.
 #'
 #' @param s String, e.g. sequence
@@ -19,8 +32,29 @@ as.char.vector = function(s) {
   strsplit(s, "")[[1]] # as char vector
 }
 
-normalize = function(seq, RNA = FALSE, lowercase = FALSE) {
-  seq
+#' Normalize a nucleotide sequence. Default is DNA bases and upper-case letters.
+#'
+#' Note that unknown bases (e.g. letter K) do not raise any exceptions.
+#' @param seq A vector of sequences as a string to be processed.
+#' @param RNA If true, RNA bases are used, i.e. T becomes U.
+#' If false (default), DNA bases are used, i.e. U becomes T.
+#' @param lowercase If true, all letters are converted to lowercase (ATG -> atg).
+#' IF false (default), all letters will be uppercase (atg -> ATG)
+#' @return Normalized string
+#' @export
+#' @example `normalize("auggcc")` will yield ATGGCC.
+normalize = function(seqv, RNA = FALSE, lowercase = FALSE) {
+  # TODO impl. in Rust
+  r = sapply(seqv, function(seq) {
+    seq1 = if (lowercase) tolower(seq) else toupper(seq)
+    seq2 = if (lowercase) {
+      if (RNA) gsub("t", "u", seq1) else gsub("u", "t", seq1)
+    } else {
+      if (RNA) gsub("T", "U", seq1) else gsub("U", "T", seq1)
+    }
+    seq2
+  })
+  as.vector(r)
 }
 
 #' Frequencies of tuples (codon).
@@ -31,7 +65,7 @@ normalize = function(seq, RNA = FALSE, lowercase = FALSE) {
 #' @return Data frame with two columns:
 #' 1. tuple, 2. number of tuples in vector
 #' @export
-tuples.freq = function(tuples) {
+tuples_freq = function(tuples) {
   tsize = nchar(tuples[1])
   ftuples = factor(tuples, levels = all_tuples(tsize))
 
@@ -44,10 +78,10 @@ tuples.freq = function(tuples) {
 
 # Register new generic function:
 #' @export
-amino.acids = function(x, ...) UseMethod("amino.acids", x)
+amino_acids = function(x, ...) UseMethod("amino_acids", x)
 
 #' @export
-amino.acids.default = function(x, value, ...) {
+amino_acids.default = function(x, value, ...) {
   stop("Implementation for this type not supported.")
 }
 
@@ -57,7 +91,7 @@ amino.acids.default = function(x, value, ...) {
 #' By default the standard genetic code (1) is used.
 #' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
 #' @export
-amino.acids.character = function(codons, numcode = 1) {
+amino_acids.character = function(codons, numcode = 1) {
   aa = sapply(codons, function(codon) {
     ncodon = normalize(codon, RNA = FALSE, lowercase = FALSE)
     cc = seqinr::s2c(ncodon)

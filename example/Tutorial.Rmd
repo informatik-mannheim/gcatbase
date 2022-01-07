@@ -22,14 +22,28 @@ library(gcatbase)
 
 # Sequence, tuple and codon representations
 
-Tuples can be created with the `all_tuples` function.
+Note: a tuple or a codon is considered to be a special case of a nucleotide sequence.
+
+## Create of tuples from an alphabet (`all_tuples`)
+
+The function `all_tuples` creates all tuples. It expects the tuple size `tsize` and an alphabet $\Sigma$.
 
 (`rextendr` does not have parameter names, does it?)
+
+```{r}
+sigma = c("+", "-") # Alphabet of two letters
+tuples = all_tuples(tsize = 2, alphabet = sigma)
+print(tuples)
+```
+
+Codons can be created with the `all_tuples` this way. By default, the alphabet are DNA bases.
 
 ```{r}
 codons = all_tuples(3)
 print(codons)
 ```
+
+## Normalization of nucleotide seuquences (`normalize`)
 
 There are many ways to represent nucleotide sequences and codons or tuples in general:
 
@@ -40,12 +54,18 @@ There are many ways to represent nucleotide sequences and codons or tuples in ge
  `gcatbase` offers functions to convert the representation. The default representation is DNA in upper-case.
 
 `normalize` converts a sequence or a vector of sequences (e.g. codons) to a specified representation.
-```{r eval=F}
-rna_codons = normalize(codons, nuc = "RNA", lowercase = T)
+```{r}
+rna_codons = normalize(codons, RNA = TRUE, lowercase = TRUE)
 print(rna_codons)
 ```
 
-Note: a tuple or a codon is a special case of a nucleotide sequence.
+Of course, we can only normalize a sequence as well:
+
+```{r}
+seq = "ATCATGCCCACGGCGCGGAGGATAGCGAGCAGGT"
+seqrna = normalize(seq, RNA = TRUE) # Uppercase is default
+print(seqrna)
+```
 
 # Codes
 
@@ -75,42 +95,48 @@ In particular for codons the `summary` function is available.
 print(summary(X))
 ```
 
-## Random codes (`random.code`)
+## Random codes (`random_code`)
 
 It is also possible to create random codes.
 
 ```{r}
-Xr = random.code(size = 10, tsize = 4)
+Xr = random_code(size = 10, tsize = 4)
 print(Xr)
 ```
 
-## Persisting codes in a text file
+## Persisting codes in a text file (`write_codes` and `read_codes`)
 
 Codes can be written to and read from a file.
 
 ```{r}
-write.codes(filename = "codes.txt", codes = list(X))
+write_codes(filename = "codes.txt", codes = list(X, Xr), header = "# My codes file")
+```
+
+This will create a file `codes.txt` with the following content:
+```{r echo=F, comment = ""}
+s = readLines("codes.txt")
+cat(s[1], "\n", s[2], "\n", s[3])
 ```
 
 ```{r}
-X2 = read.codes("codes.txt")
-print(X2)
+codes = read_codes("codes.txt")
+print(codes)
 ```
 
 
-# Manipulation of sequences, tuples and codons
+# Manipulation and analysis of sequences, tuples and codons
 
-## Tuples from a sequence
+## Tuples from a sequence (`split`, `tuples_usage`)
 
 ```{r}
-seq = "ATCATGACGGCGCGGAGGATAGCGAGCAGGT"
+print(seq)
 t = gcatbase::split(seq, 3)
 print(t)
 ```
 
-Next we want to calculate the tuple usage. `tuples.usage` creates a data frame.
+Next we want to calculate the tuple usage. `tuples_usage` creates a data frame.
 ```{r}
-u = tuples.freq(t)
+u = tuples_freq(t)
 print(head(u, 10))
 ```
 
@@ -120,7 +146,7 @@ X2 = code(t, "Code from seq.")
 print(X2)
 ```
 
-## Shift tuples
+## Shift tuples (`shift`)
 
 ```{r}
 X2s = code(shift(1, X2$tuples), "shifted code")
@@ -133,7 +159,7 @@ print(X2s)
 strip_complements(X)
 ```
 
-## Classify sequence according to a code
+## Classify sequence according to a code (`classify`, `code_usage`)
 
 ```{r}
 h = classify(seq, X)
@@ -146,26 +172,26 @@ u = length(h[h == 1]) / length(h)
 print(u)
 ```
 
-or use the convenient function `code.usage`:
+or use the convenient function `code_usage`:
 
 ```{r}
-u = code.usage(seq, X)
+u = code_usage(seq, X)
 print(u)
 ```
 
-# Amino acids
+# Amino acids (`amino_acids`)
 
 We can translate a vector of codons into amino acids:
 ```{r}
-print(amino.acids(t))
+print(amino_acids(t))
 ```
 
 Also, we can ask what amino acids are used by a code. Here the Vertebrate Mitochondrial Code (transl_table = 2) is used:
 ```{r}
-print(amino.acids(X, numcode = 2)) # generic for amino.acids(X$tuples)
+print(amino_acids(X, numcode = 2)) # generic for amino_acids(X$tuples)
 ```
 
-# Operations over lists
+# Operations over lists (`flatten`)
 
 Sometimes we need to perform some operations over entries in a Fasta file. For instance, we want to count the tuples in a Fasta record. First, the file is read and converted into GCAT's default representation:
 ```{r}
@@ -183,7 +209,7 @@ ntuples = sapply(fasta, function(f) {
 tuples = unlist(ntuples)
 
 # Now the analysis:
-freq = tuples.freq(tuples)
+freq = tuples_freq(tuples)
 print(head(freq))
 ```
 
@@ -193,7 +219,7 @@ This pattern is implemented in GCAT's `flatten` function. The first paramter is 
 
 ```{r}
 codons = gcatbase::flatten(fasta, gcatbase::split)
-freq = tuples.freq(codons)
+freq = tuples_freq(codons)
 print(head(freq))
 ```
 
@@ -205,7 +231,7 @@ op = function(seq) {
 }
 
 tuples4 = gcatbase::flatten(fasta, op)
-freq = tuples.freq(tuples4)
+freq = tuples_freq(tuples4)
 print(head(freq))
 ```
 
