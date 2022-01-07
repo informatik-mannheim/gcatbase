@@ -43,7 +43,7 @@ codons = all_tuples(3)
 print(codons)
 ```
 
-## Normalization of nucleotide seuquences (`normalize`)
+## Normalization of nucleotide sequences (`normalize`)
 
 There are many ways to represent nucleotide sequences and codons or tuples in general:
 

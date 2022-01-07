@@ -51,12 +51,12 @@ summary.gcat.code = function(code) {
     paste0(n, " tuples: ", paste(code$tuples, collapse = ", "))
   )
   cat(r[[1]]); cat("\n")
-  cat(r[[2]])  
+  cat(r[[2]])
   if (code$tsize == 3) {
     aa = amino_acids(code$tuples)
     na = length(aa)
     r[[3]] = paste0(na, " amino acids: ", paste(aa, collapse = ", "))
-    cat("\n"); cat(r[[3]]) 
+    cat("\n"); cat(r[[3]])
   }
   cat("\n")
   return(invisible(NULL))

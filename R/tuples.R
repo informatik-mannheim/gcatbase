@@ -19,7 +19,7 @@ nuc_bases = function() c("A", "T", "C", "G")
 #' @param tsize Tuple size (e.g. 3 for codons)
 #' @param alphabet The alphabet. Default are DNA bases.
 #' @example `codons = all_tuples(3)`
-#* @export
+#' @export
 all_tuples = function(tsize, alphabet = nuc_bases()) {
   r_all_tuples(tsize, alphabet)
 }
