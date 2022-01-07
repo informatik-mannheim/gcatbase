@@ -31,6 +31,7 @@ struct Counter {
     n: i32,
 }
 
+/// @export
 #[extendr]
 impl Counter {
     fn new() -> Self {
@@ -46,9 +47,9 @@ impl Counter {
     }
 }
 
-// r_name is not yet working. Workaround in R/r_name.R:
-// #' @export
 // test.demo <- function() .Call(wrap__test_demo)
+// r_name is not yet working. Workaround in R/r_name.R:
+/// #' @export
 #[extendr(r_name="test.demo")]
 pub fn test_demo() -> Vec<i32> {
     let _rv = R!("c(1, 2, 3)").unwrap();

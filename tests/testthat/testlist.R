@@ -2,26 +2,30 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #     http://www.apache.org/licenses/LICENSE-2.0
-#
+#  
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.
+# limitations under the License. 
 
-#' @author Markus Gumbel
+# Test file
+library(testthat)
 
-#' Init library.
-#'
-#' @param libname
-#' @param pkgname
-#'
-#' @return
-#' @export
-#'
-#' @examples
-.onLoad = function(libname, pkgname) {
-  # Register new generic function:
-}
+context("list") # Infos
+
+test_that("List one entry", {
+  l = list("AUGGGG")
+  r = flatten(l, gcatbase::split)
+  expect_equal(length(r), 2)
+  expect_equal(r[1], "AUG")
+})
+
+test_that("List", {
+  l = list("AUGGGG", "CCC")
+  r = flatten(l, gcatbase::split)
+  expect_equal(length(r), 3)
+  expect_equal(r[3], "CCC")
+})
