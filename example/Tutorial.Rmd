@@ -149,7 +149,7 @@ print(X2)
 ## Shift tuples (`shift`)
 
 ```{r}
-X2s = code(shift(1, X2$tuples), "shifted code")
+X2s = code(shift(X2$tuples, 1), "shifted code")
 print(X2s)
 ```
 

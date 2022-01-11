@@ -2,28 +2,33 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-#  
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License. 
+# limitations under the License.
 
-#' Shift each tuple (or sequence) in a vector for `k` positions to the right.
+#' Shift each tuple (or sequence) in a vector for `k` positions to the left
+#' (AUG -> UGA).
 #'
-#' @param k Number of positions. `k` equal to 0 means no shift. A negative number shifts to the left.
 #' @param tuples Vector of strings
+#' @param k Number of positions. `k` equal to 0 means no shift. A negative number shifts to the right (AUG -> GAU).
 #'
 #' @return Vector with shifted tuples.
 #' @export
-shift = function(k, tuples) {
+shift = function(tuples, k) {
   sapply(tuples, function(tuple) {
     n = nchar(tuple)
-    suffix = substr(tuple, k + 1, n)
+    if (k < 0) {
+      k = n + k # Shift for n-|k| to the left
+    }
     prefix = substr(tuple, 1, k)
-    paste(suffix, prefix, sep = "")
+    suffix = substr(tuple, k + 1, n)
+    # Change order:
+    as.character(paste(suffix, prefix, sep = ""))
   })
 }
 
@@ -37,6 +42,10 @@ shift = function(k, tuples) {
 #' @return Vector of tuples. Each tuple is a string.
 #' @export
 split = function(seq, tsize = 3) {
+  tsize = round(tsize, 0) # Ensure integers
+  if (tsize < 1) {
+    stop(paste0("Tuple size must not be less than 1! ", tsize, " < 1"))
+  }
   n = as.integer(nchar(seq) / tsize) * tsize # number of tuples
   if (n < tsize) { # if there is no tuple at all...
     return(c()) # an empty vector is returned.
@@ -47,9 +56,9 @@ split = function(seq, tsize = 3) {
 }
 
 #' Truncate a string at the beginning.
-#' 
+#'
 #' This is useful for a frame shift.
-#' 
+#'
 #' @param k Characters to truncate: 0, 1, 2, etc.
 #' @return String or sequence where k nucleotides are truncated at the beginning.
 #' @export
