@@ -69,7 +69,7 @@ summary.gcat.code = function(code) {
 #' By default the standard genetic code (1) is used. 
 #' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
 #' @export 
-amino_acids.gcat.code = function(code, numcode) {
+amino_acids.gcat.code = function(code, numcode = 1) {
   if (code$tsize != 3) {
     stop("Tuple size must be 3 for amino acid translation!")
   }
