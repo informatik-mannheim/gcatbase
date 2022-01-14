@@ -32,6 +32,47 @@ shift = function(tuples, k) {
   })
 }
 
+#' Complementary base.
+#'
+#' @param base b in upper case and DNA bases
+#' @export
+compl = function(tuples) {
+  s = sapply(tuples, function(t) {
+    cv = gcatbase::as.char.vector(t)
+    ccv = sapply(cv, function(b) {
+      # complementary base
+      cb = switch(b,
+        "A" = "T",
+        "T" = "A",
+        "C" = "G",
+        "G" = "C"
+      )
+      if (nchar(cb) == 1) cb else stop(paste0("Invalid base: ", b, ". Only A, T, G, C allowed."))
+    })
+    paste0(ccv, collapse = "") # vector to string again
+  })
+  as.vector(s) # Remove field names.
+}
+
+#' Reversed and complementary tuples.
+#'
+#' Example: (ATTGA, GCG) -> (TCAAT, CGC)
+#'
+#' @param tuples Vector of tuples. Note: tuples are not required
+#' to have the same tuple size.
+#' @return Vector of same lengths like tuples where bases are in reverse order
+#' and complementary.
+#' @export
+rev_compl = function(tuples) {
+  s = sapply(tuples, function(t) {
+    cv = gcatbase::as.char.vector(t)
+    rcv = rev(cv) # reverse order
+    rcv = sapply(rcv, function(b) compl(b)) # complementary base
+    paste0(rcv, collapse = "") # vector to string again
+  })
+  as.vector(s) # Remove field names.
+}
+
 #' Split string sequence into tupels (codons).
 #'
 #' If the last tuple has less than `tsize` bases it is skipped.

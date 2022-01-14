@@ -153,10 +153,18 @@ X2s = code(shift(X2$tuples, 1), "shifted code")
 print(X2s)
 ```
 
-## Strip complements
+## Reverse and complementary tuples (`compl`, `rev_compl`)
 
-```{r eval=F}
-strip_complements(X)
+The complementary tuples are for instance:
+```{r}
+print(t)
+print(compl(t))
+```
+
+The anticodons of the tuples in `t` are:
+
+```{r}
+print(rev_compl(t))
 ```
 
 ## Classify sequence according to a code (`classify`, `code_usage`)

@@ -86,3 +86,36 @@ test_that("split 1.6", {
   s = "GCATA"
   expect_equal(split(s, 1.6), c("GC", "AT"))
 })
+
+
+context("self complementary")
+
+test_that("complementary 1", {
+  tv = "A"
+  expect_equal(compl(tv), "T")
+})
+
+test_that("complementary 2", {
+  tv = c("A", "G")
+  expect_equal(compl(tv), c("T", "C"))
+})
+
+test_that("self complementary single", {
+  tv = "A"
+  expect_equal(rev_compl(tv), "T")
+})
+
+test_that("self complementary codon", {
+  tv = c("TAG")
+  expect_equal(rev_compl(tv), c("CTA"))
+})
+
+test_that("self complementary 2 codons different size", {
+  tv = c("CAG", "ATTG")
+  expect_equal(rev_compl(tv), c("CTG", "CAAT"))
+})
+
+test_that("self complementary 2 codons again", {
+  tv = c("CAG", "ATT")
+  expect_equal(rev_compl(tv), c("CTG", "AAT"))
+})
