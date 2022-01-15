@@ -15,13 +15,11 @@
 
 #' Init library.
 #'
-#' @param libname
-#' @param pkgname
+#' @param libname Name
+#' @param pkgname Package
 #'
 #' @return
 #' @export
-#'
-#' @examples
 .onLoad = function(libname, pkgname) {
   # Register new generic function:
 }

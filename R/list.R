@@ -19,8 +19,7 @@
 #' @param op A function to apply on the list's entries.
 #' The function's return type must be a vector (or skalar).
 #' @return Vector of elements.
-#' @export 
-#' @example 
+#' @export
 flatten = function(l, op) {
   ntuples = sapply(l, function(f) {
     seq = as.character(f)

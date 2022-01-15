@@ -2,14 +2,14 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-#  
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License. 
+# limitations under the License.
 
 #' Create a code from a list of tuples.
 #'
@@ -50,25 +50,27 @@ summary.gcat.code = function(code) {
     paste0("Code: ", code$id),
     paste0(n, " tuples: ", paste(code$tuples, collapse = ", "))
   )
-  cat(r[[1]]); cat("\n")
+  cat(r[[1]])
+  cat("\n")
   cat(r[[2]])
   if (code$tsize == 3) {
     aa = amino_acids(code$tuples)
     na = length(aa)
     r[[3]] = paste0(na, " amino acids: ", paste(aa, collapse = ", "))
-    cat("\n"); cat(r[[3]])
+    cat("\n")
+    cat(r[[3]])
   }
   cat("\n")
   return(invisible(NULL))
 }
 
 #' Translate codons of a code into amino acids.
-#' 
+#'
 #' @param code A code with tuples of size 3.
-#' @param numcode The ncbi genetic code number for translation. 
-#' By default the standard genetic code (1) is used. 
+#' @param numcode The ncbi genetic code number for translation.
+#' By default the standard genetic code (1) is used.
 #' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
-#' @export 
+#' @export
 amino_acids.gcat.code = function(code, numcode = 1) {
   if (code$tsize != 3) {
     stop("Tuple size must be 3 for amino acid translation!")
@@ -83,11 +85,10 @@ amino_acids.gcat.code = function(code, numcode = 1) {
 #' 1, ACA, ACT, ... \cr
 #' 2, ACT, ATT, ... \cr
 #'
-#' @param filename
+#' @param filename Textfile with codes in it.
 #' @param tsize The size of the tuples in the code. Default is 3.
 #' @param skip_codeid_col If true the first column is left out.
-#'
-#' @return
+#' @return A list of codes.
 #' @export
 read_codes = function(filename, tsize = 3,
                       skip_codeid_col = TRUE) {
@@ -117,10 +118,9 @@ read_codes = function(filename, tsize = 3,
 #'
 #' Details see `read.codes`.
 #'
-#' @param filename
+#' @param filename Textfile with codes in it.
 #' @param codes List of codes.
 #' @param header Header of text file. Default is "# codes".
-#'
 #' @export
 write_codes = function(filename, codes, header = "# codes") {
   write(header, filename)

@@ -38,7 +38,7 @@ shift = function(tuples, k) {
 #' @export
 compl = function(tuples) {
   s = sapply(tuples, function(t) {
-    cv = gcatbase::as.char.vector(t)
+    cv = as.char.vector(t)
     ccv = sapply(cv, function(b) {
       # complementary base
       cb = switch(b,
@@ -65,7 +65,7 @@ compl = function(tuples) {
 #' @export
 rev_compl = function(tuples) {
   s = sapply(tuples, function(t) {
-    cv = gcatbase::as.char.vector(t)
+    cv = as.char.vector(t)
     rcv = rev(cv) # reverse order
     rcv = sapply(rcv, function(b) compl(b)) # complementary base
     paste0(rcv, collapse = "") # vector to string again
