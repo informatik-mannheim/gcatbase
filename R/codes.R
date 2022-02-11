@@ -53,6 +53,9 @@ summary.gcat.code = function(code) {
   cat(r[[1]])
   cat("\n")
   cat(r[[2]])
+  cat("\n")
+  a = alphabet(code$tuples)
+  cat(paste0("Seq-alphabet: ", toString(unlist(a$letters)), " (", a$type, ")"))
   if (code$tsize == 3) {
     aa = amino_acids(code$tuples)
     na = length(aa)

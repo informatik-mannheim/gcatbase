@@ -17,3 +17,7 @@ src-i386
 src-x64
 target
 codes.txt
+.Rproj.user
+*.Rproj
+.Rhistory
+kill-r.bat

@@ -20,3 +20,27 @@ test_that("Code", {
   X = code(tuples = c("AUG", "GCG"), id = "A code")
   expect_equal(X$id, "A code")
 })
+
+context("alphabet") # Infos
+
+test_that("Alphabet RNA", {
+  s = "AUGGCCAAU"
+  a = gcatbase::alphabet(s)
+  expect_equivalent(a$letters, c("A", "C", "G", "U"))
+  expect_equal(a$type, "RNA")
+})
+
+test_that("Alphabet DNA", {
+  s = "ATGGCCAAT"
+  a = alphabet(s)
+  expect_equivalent(a$letters, c("A", "C", "G", "T"))
+  expect_equal(a$type, "DNA")
+})
+
+test_that("Alphabet unknown", {
+  s = "Hallo"
+  a = alphabet(s)
+  # Case is apparently ignored:
+  expect_equivalent(a$letters, c("a", "H", "l", "o"))
+  expect_equal(a$type, "unknown")
+})

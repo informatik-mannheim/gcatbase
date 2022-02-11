@@ -75,25 +75,37 @@ rev_compl = function(tuples) {
 
 #' Split string sequence into tupels (codons).
 #'
+#' A sequence can be split either by passing the parameter `tsize` or the
+#' parameter `sep`. If `sep` is set, `tsize` is ignored.
+#' 
+#' In case of `tsize` only tuples of exact this size are returned. 
 #' If the last tuple has less than `tsize` bases it is skipped.
+#' 
+#' On the other hand, if `set` is used, all tuples are returned. There 
+#' is also no check if the tuples have the same size.
 #'
 #' @param seq Sequence as a string.
 #' @param tsize Tuple size. Default: 3 for codons.
+#' @param sep Separator, e.g. ","
 #'
 #' @return Vector of tuples. Each tuple is a string.
 #' @export
-split = function(seq, tsize = 3) {
-  tsize = round(tsize, 0) # Ensure integers
-  if (tsize < 1) {
-    stop(paste0("Tuple size must not be less than 1! ", tsize, " < 1"))
+split = function(seq, tsize = 3, sep = NULL) {
+  if (is.null(sep)) { # split by tuple size
+    tsize = round(tsize, 0) # Ensure integers
+    if (tsize < 1) {
+      stop(paste0("Tuple size must not be less than 1! ", tsize, " < 1"))
+    }
+    n = as.integer(nchar(seq) / tsize) * tsize # number of tuples
+    if (n < tsize) { # if there is no tuple at all...
+      return(c()) # an empty vector is returned.
+    }
+    starts = seq(1, n, by = tsize)
+    # chop it up:
+    sapply(starts, function(ii) substr(seq, ii, ii + (tsize - 1)))
+  } else { # split by separator
+    strsplit(seq, split = sep)[[1]]
   }
-  n = as.integer(nchar(seq) / tsize) * tsize # number of tuples
-  if (n < tsize) { # if there is no tuple at all...
-    return(c()) # an empty vector is returned.
-  }
-  starts = seq(1, n, by = tsize)
-  # chop it up:
-  sapply(starts, function(ii) substr(seq, ii, ii + (tsize - 1)))
 }
 
 #' Truncate a string at the beginning.

@@ -62,6 +62,11 @@ test_that("vector shift 1", {
   expect_equivalent(shift(s, 2), c("GTTTGAGTATCA", "GAU"))
 })
 
+test_that("split default", {
+  s = "GACT"
+  expect_equal(split(s), c("GAC"))
+})
+
 test_that("split 0", {
   s = "GACT"
   expect_error(split(s, 0))
@@ -85,6 +90,21 @@ test_that("split 3", {
 test_that("split 1.6", {
   s = "GCATA"
   expect_equal(split(s, 1.6), c("GC", "AT"))
+})
+
+test_that("split sep", {
+  s = "GC,AT,A"
+  expect_equal(split(s, sep = ","), c("GC", "AT", "A"))
+})
+
+test_that("split sep and tsize", {
+  s = "GC,AT,A"
+  expect_equal(split(s, tsize = 2, sep = ","), c("GC", "AT", "A"))
+})
+
+test_that("split sep none", {
+  s = "GC,AT,A"
+  expect_equal(split(s, sep = ";"), c("GC,AT,A"))
 })
 
 

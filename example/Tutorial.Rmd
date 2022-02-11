@@ -24,7 +24,7 @@ library(gcatbase)
 
 Note: a tuple or a codon is considered to be a special case of a nucleotide sequence.
 
-## Create of tuples from an alphabet (`all_tuples`)
+## Creation of tuples from an alphabet (`all_tuples`)
 
 The function `all_tuples` creates all tuples. It expects the tuple size `tsize` and an alphabet $\Sigma$.
 
@@ -41,6 +41,23 @@ Codons can be created with the `all_tuples` this way. By default, the alphabet a
 ```{r}
 codons = all_tuples(3)
 print(codons)
+```
+
+## The alphabet of tuples or a sequence (`alphabet`)
+
+`alphabet` determines for a sequence or a vector of sequences the underlying alphabet including its type.
+The type `type` can be "RNA" or "DNA" or "unkown".
+
+```{r}
+alphabet1 = alphabet("AUGC") # one sequence
+print(alphabet1$letters)
+print(alphabet1$type)
+print(alphabet1)
+```
+
+```{r}
+alphabet2 = alphabet(c("ATG", "CTT", "GAG", "CCG")) # vector
+print(alphabet2)
 ```
 
 ## Normalization of nucleotide sequences (`normalize`)
@@ -95,6 +112,8 @@ In particular for codons the `summary` function is available.
 print(summary(X))
 ```
 
+It is also possible to create a code from a single sequence that is decomposed into tuples by means of the `split` function. `split` is explained in more detail below.
+
 ## Random codes (`random_code`)
 
 It is also possible to create random codes.
@@ -144,6 +163,20 @@ Make a code from the sequence. Note that `code` makes the tuples unique:
 ```{r}
 X2 = code(t, "Code from seq.")
 print(X2)
+```
+
+`split` can also be used to create a code from a sequence.
+
+```{r}
+X3 = code(split("AUGUGAGC", tsize = 3), id = "Code from sequence")
+print(X3)
+```
+
+Another argument for `split` is `sep`. It can only be used when `tsize` is ommited. The sequence is splitted according to the value. This is useful when codons (or tuples) are copied and pasted from a text.
+
+```{r}
+X5 = code(split("AUG,UUG,GCG", sep = ","), id = "Code from separator")
+print(X5)
 ```
 
 ## Shift tuples (`shift`)
