@@ -15,16 +15,16 @@
 #' @export 
 alphabet = function(s) {
   # see also Biostrings::alphabet()
-
   vs = as.character(unlist(sapply(s, function(si) strsplit(si, "")[[1]])))
 
   uv = unique(vs) # no duplicates
   uv = uv[order(uv)] # sorted
+  is.dna <- all(uv %in% c("A", "C", "G", "T"))
+  is.rna <- all(uv %in% c("A", "C", "G", "U"))
 
-  atype = if (all(uv == c("A", "C", "G", "U"))) "RNA" else {
-    if (all(uv == c("A", "C", "G", "T"))) "DNA" else "unknown"
-  }
-  alphabet = list(letters = uv, type = atype)
+  atype <- if (is.dna && is.rna) "DNA and/or RNA" else if (is.dna) "DNA" else if (is.rna) "RNA" else "unknown"
+
+  alphabet = list(letters = uv, type = atype, is.dna = is.dna, is.rna = is.rna)
   class(alphabet) = "gcat.alphabet"
   alphabet
 }

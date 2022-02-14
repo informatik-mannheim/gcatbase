@@ -20,16 +20,20 @@
 #' @return Vector with shifted tuples.
 #' @export
 shift = function(tuples, k) {
-  sapply(tuples, function(tuple) {
+  s <- sapply(tuples, function(tuple) {
     n = nchar(tuple)
     if (k < 0) {
       k = n + k # Shift for n-|k| to the left
     }
+
+    k <- ((k - 1) %% n) + 1
     prefix = substr(tuple, 1, k)
     suffix = substr(tuple, k + 1, n)
     # Change order:
     as.character(paste(suffix, prefix, sep = ""))
   })
+
+  code(as.vector(s), id = paste0(get.id(tuples), "_shifted_by_", toString(k)), unique.set = F, sorted.set = F) # Return as code object.
 }
 
 #' Complementary base.
@@ -42,16 +46,17 @@ compl = function(tuples) {
     ccv = sapply(cv, function(b) {
       # complementary base
       cb = switch(b,
-        "A" = "T",
-        "T" = "A",
-        "C" = "G",
-        "G" = "C"
+                  "A" = "T",
+                  "T" = "A",
+                  "C" = "G",
+                  "G" = "C"
       )
       if (nchar(cb) == 1) cb else stop(paste0("Invalid base: ", b, ". Only A, T, G, C allowed."))
     })
     paste0(ccv, collapse = "") # vector to string again
   })
-  as.vector(s) # Remove field names.
+
+  code(as.vector(s), id = paste0(get.id(tuples), "_compl"), unique.set = F, sorted.set = F) # Return as code object.
 }
 
 #' Reversed and complementary tuples.
@@ -64,13 +69,12 @@ compl = function(tuples) {
 #' and complementary.
 #' @export
 rev_compl = function(tuples) {
-  s = sapply(tuples, function(t) {
+  s = sapply(compl(tuples), function(t) {
     cv = as.char.vector(t)
     rcv = rev(cv) # reverse order
-    rcv = sapply(rcv, function(b) compl(b)) # complementary base
     paste0(rcv, collapse = "") # vector to string again
   })
-  as.vector(s) # Remove field names.
+  code(as.vector(s), id = paste0(get.id(tuples), "_rev_compl"), unique.set = F, sorted.set = F) # Return as code object
 }
 
 #' Split string sequence into tupels (codons).
@@ -87,11 +91,12 @@ rev_compl = function(tuples) {
 #' @param seq Sequence as a string.
 #' @param tsize Tuple size. Default: 3 for codons.
 #' @param sep Separator, e.g. ","
+#' @param regexp.sep Separator as regular expresion, e.g. "[, ]+"
 #'
 #' @return Vector of tuples. Each tuple is a string.
 #' @export
-split = function(seq, tsize = 3, sep = NULL) {
-  if (is.null(sep)) { # split by tuple size
+split = function(seq, tsize = 3, sep = NULL, regexp.sep = NULL) {
+  if (is.null(regexp.sep) && is.null(sep)) { # split by tuple size
     tsize = round(tsize, 0) # Ensure integers
     if (tsize < 1) {
       stop(paste0("Tuple size must not be less than 1! ", tsize, " < 1"))
@@ -103,6 +108,8 @@ split = function(seq, tsize = 3, sep = NULL) {
     starts = seq(1, n, by = tsize)
     # chop it up:
     sapply(starts, function(ii) substr(seq, ii, ii + (tsize - 1)))
+  } else if (is.null(sep)) { # split by separator
+    stringr::str_split(seq, pattern = regexp.sep)[[1]]
   } else { # split by separator
     strsplit(seq, split = sep)[[1]]
   }

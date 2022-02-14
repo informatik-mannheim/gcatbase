@@ -10,7 +10,6 @@ Tutorial.html
 .Rbuildignore
 extendr-wrappers.R
 settings.json
-NAMESPACE
 man
 docs
 src-i386
@@ -21,3 +20,4 @@ codes.txt
 *.Rproj
 .Rhistory
 kill-r.bat
+/gcatase.iml

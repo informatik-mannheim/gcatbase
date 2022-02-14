@@ -39,27 +39,32 @@ test_that("frame 3", {
 test_that("shift 0", {
   s = "CAGTTTGAGTAT"
   # Ignore attributes
-  expect_equivalent(shift(s, 0), "CAGTTTGAGTAT")
+  expect_equivalent(as.character(shift(s, 0)), "CAGTTTGAGTAT")
 })
 
 test_that("shift 1", {
   s = "CAGTTTGAGTAT"
-  expect_equivalent(shift(s, 1), "AGTTTGAGTATC")
+  expect_equivalent(as.character(shift(s, 1)), "AGTTTGAGTATC")
 })
 
 test_that("shift 2", {
   s = "CAGTTTGAGTAT"
-  expect_equivalent(shift(s, 2), "GTTTGAGTATCA")
+  expect_equivalent(as.character(shift(s, 2)), "GTTTGAGTATCA")
 })
 
 test_that("shift -1", {
   s = "CAGTTTGAGTAT"
-  expect_equivalent(shift(s, -1), "TCAGTTTGAGTA")
+  expect_equivalent(as.character(shift(s, -1)), "TCAGTTTGAGTA")
 })
 
 test_that("vector shift 1", {
   s = c("CAGTTTGAGTAT", "AUG")
-  expect_equivalent(shift(s, 2), c("GTTTGAGTATCA", "GAU"))
+  expect_equivalent(as.character(shift(s, 2)), c("GTTTGAGTATCA", "GAU"))
+})
+
+test_that("vector shift k>n", {
+  s = c("CAGTTTGAGTAT", "AUG")
+  expect_equivalent(as.character(shift(s, 5)), c("TGAGTATCAGTT", "GAU"))
 })
 
 test_that("split default", {
@@ -97,6 +102,11 @@ test_that("split sep", {
   expect_equal(split(s, sep = ","), c("GC", "AT", "A"))
 })
 
+test_that("split regexp.sep", {
+  s = "GC, AT, A"
+  expect_equal(split(s, regexp.sep = "[, ]+"), c("GC", "AT", "A"))
+})
+
 test_that("split sep and tsize", {
   s = "GC,AT,A"
   expect_equal(split(s, tsize = 2, sep = ","), c("GC", "AT", "A"))
@@ -112,30 +122,30 @@ context("self complementary")
 
 test_that("complementary 1", {
   tv = "A"
-  expect_equal(compl(tv), "T")
+  expect_equal(as.character(compl(tv)), "T")
 })
 
 test_that("complementary 2", {
   tv = c("A", "G")
-  expect_equal(compl(tv), c("T", "C"))
+  expect_equal(as.character(compl(tv)), c("T", "C"))
 })
 
 test_that("self complementary single", {
   tv = "A"
-  expect_equal(rev_compl(tv), "T")
+  expect_equal(as.character(rev_compl(tv)), "T")
 })
 
 test_that("self complementary codon", {
   tv = c("TAG")
-  expect_equal(rev_compl(tv), c("CTA"))
+  expect_equal(as.character(rev_compl(tv)), c("CTA"))
 })
 
 test_that("self complementary 2 codons different size", {
   tv = c("CAG", "ATTG")
-  expect_equal(rev_compl(tv), c("CTG", "CAAT"))
+  expect_equal(as.character(rev_compl(tv)), c("CTG", "CAAT"))
 })
 
 test_that("self complementary 2 codons again", {
   tv = c("CAG", "ATT")
-  expect_equal(rev_compl(tv), c("CTG", "AAT"))
+  expect_equal(as.character(rev_compl(tv)), c("CTG", "AAT"))
 })

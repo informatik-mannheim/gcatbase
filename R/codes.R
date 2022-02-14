@@ -10,21 +10,41 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+DEFAULT_ID  <- "unkn."
 #' Create a code from a list of tuples.
 #'
 #' @param tuples Vector of tuples or codons as strings, e.g. c("AUC", "GCA").
 #' @param id A brief description of the code. Default is "unkn.".
+#' @param unique.set A boulian value. If true, all dublicates are removed from the set.
+#' @param sorted.set A boulian value. If true, the set is sorted in alphabetical order.
 #'
-#' @return List with two elements: 1) id, 2) codons.
+#' @return A 'gcat.code' object. Derived from vector with two attributs: 1) id,  2) tsize.
 #' @export
-code = function(tuples, id = "unkn.") {
-  utuples = unique(tuples)
-  utuples = utuples[order(utuples)] # Sort them
-  tsize = nchar(utuples[1]) # Letter per tuple
-  code = list(id = id, tuples = utuples, tsize = tsize)
+code = function(tuples, id = DEFAULT_ID, unique.set= T, sorted.set= T) {
+  code <- tuples
+  if(unique.set) {code = unique(code)}
+  if(sorted.set) {code = code[order(code)]}
+   # Sort them
+  tsize = unique(sapply(code, nchar)) # Letter per tuple
+  tsize = sort(tsize, decreasing = T) # Letter per tuple
+
+  attr(code, "id") = id
+  attr(code, "tsize") = tsize
   class(code) = "gcat.code"
   code
+}
+
+#' Returns the id of a code or the default id ("unkn.")
+#'
+#' @param code A 'gcat.code' object
+#'
+#' @return The id of a 'gcat.code'
+#'
+#' @examples get.id(code(c("ACG", "CC"), id = "Test 1"))
+#'
+#' @export
+get.id <- function(code) {
+  if(is.null(attr(code, 'id'))) DEFAULT_ID else attr(code, 'id')
 }
 
 #' Pretty prints a code.
@@ -34,7 +54,7 @@ code = function(tuples, id = "unkn.") {
 #' @return
 #' @export
 print.gcat.code = function(code) {
-  s = paste(code$id, ": ", toString(unlist(code$tuples)), sep = "")
+  s = paste(attr(code, 'id'), ": ", toString(unlist(code)), sep = "")
   print.default(s)
 }
 
@@ -45,19 +65,20 @@ print.gcat.code = function(code) {
 #' @return
 #' @export
 summary.gcat.code = function(code) {
-  n = length(code$tuples)
+  n = length(code)
   r = list(
-    paste0("Code: ", code$id),
-    paste0(n, " tuples: ", paste(code$tuples, collapse = ", "))
+    paste0("Code: ", attr(code, "id")),
+    paste0(n, " tuples: ", paste(code, collapse = ", "))
   )
   cat(r[[1]])
   cat("\n")
   cat(r[[2]])
   cat("\n")
-  a = alphabet(code$tuples)
+  a = alphabet(code)
   cat(paste0("Seq-alphabet: ", toString(unlist(a$letters)), " (", a$type, ")"))
-  if (code$tsize == 3) {
-    aa = amino_acids(code$tuples)
+  if (3 %in% attr(code, "tsize") && (a$is.rna || a$is.dna)) {
+    codons <- Filter(function (w) nchar(w)==3, code)
+    aa = amino_acids(codons)
     na = length(aa)
     r[[3]] = paste0(na, " amino acids: ", paste(aa, collapse = ", "))
     cat("\n")
@@ -75,10 +96,13 @@ summary.gcat.code = function(code) {
 #' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
 #' @export
 amino_acids.gcat.code = function(code, numcode = 1) {
-  if (code$tsize != 3) {
-    stop("Tuple size must be 3 for amino acid translation!")
+  a <- alphabet(code)
+  if (3 %in% attr(code, "tsize") && (a$is.rna || a$is.dna)) {
+    codons <- Filter(function (w) nchar(w)==3, code)
+    return(amino_acids.character(codons, numcode))
   }
-  amino_acids.character(code$tuples, numcode)
+
+  stop("Tuple size must be 3 for amino acid translation!")
 }
 
 #' Read one or more codes from file.
@@ -128,7 +152,7 @@ read_codes = function(filename, tsize = 3,
 write_codes = function(filename, codes, header = "# codes") {
   write(header, filename)
   res = lapply(codes, function(c) {
-    s = paste(c$id, ", ", toString(unlist(c$tuples)), sep = "")
+    s = paste(get.id(c), ", ", toString(unlist(c)), sep = "")
     write(s, filename, append = TRUE, ncolumns = 1000)
   })
 }

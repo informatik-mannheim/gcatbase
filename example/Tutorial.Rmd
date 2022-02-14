@@ -60,6 +60,12 @@ alphabet2 = alphabet(c("ATG", "CTT", "GAG", "CCG")) # vector
 print(alphabet2)
 ```
 
+```{r}
+sample.code <- gcatbase::code(c("ATG", "CTT", "GAG", "CCG"), id="sample.code")
+alphabet2 = alphabet(sample.code) # vector
+print(alphabet2)
+```
+
 ## Normalization of nucleotide sequences (`normalize`)
 
 There are many ways to represent nucleotide sequences and codons or tuples in general:

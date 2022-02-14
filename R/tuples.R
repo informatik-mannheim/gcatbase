@@ -18,7 +18,7 @@ nuc_bases = function() c("A", "T", "C", "G")
 #' Create all tuples of size `n`.
 #' @param tsize Tuple size (e.g. 3 for codons)
 #' @param alphabet The alphabet. Default are DNA bases.
-#' @example codons = all_tuples(3)
+#' @examples codons = all_tuples(3)
 #' @export
 all_tuples = function(tsize, alphabet = nuc_bases()) {
   # TODO see also seqinr::words
@@ -29,7 +29,6 @@ all_tuples = function(tsize, alphabet = nuc_bases()) {
 #'
 #' @param s String, e.g. sequence
 #' @return String as vector of characters
-#' @NoRd
 as.char.vector = function(s) {
   strsplit(s, "")[[1]] # as char vector
 }
@@ -43,8 +42,8 @@ as.char.vector = function(s) {
 #' @param lowercase If true, all letters are converted to lowercase (ATG -> atg).
 #' IF false (default), all letters will be uppercase (atg -> ATG)
 #' @return Normalized string
+#' @examples normalize("auggcc") # will yield ATGGCC.
 #' @export
-#' @example normalize("auggcc") # will yield ATGGCC.
 normalize = function(seqv, RNA = FALSE, lowercase = FALSE) {
   # TODO impl. in Rust
   r = sapply(seqv, function(seq) {
