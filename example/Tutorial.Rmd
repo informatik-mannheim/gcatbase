@@ -188,7 +188,7 @@ print(X5)
 ## Shift tuples (`shift`)
 
 ```{r}
-X2s = code(shift(X2$tuples, 1), "shifted code")
+X2s = code(shift(X2, 1), "shifted code")
 print(X2s)
 ```
 
@@ -212,6 +212,7 @@ print(rev_compl(t))
 h = classify(seq, X)
 print(h)
 ```
+
 
 From this we can derive the code usage $u$ (in %)
 ```{r}
@@ -286,4 +287,12 @@ print(head(freq))
 
 ```{r}
 print(test.demo()) # Rust function
+```
+
+Also possible for a code and comptiable to `rextendr`.
+```{r eval=F}
+X = Code$new(c("AUG"), id = "Foo")
+X$tuples
+X$tsize
+X$alphabet
 ```

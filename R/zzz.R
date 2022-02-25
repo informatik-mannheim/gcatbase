@@ -17,7 +17,6 @@
 #'
 #' @param libname Name
 #' @param pkgname Package
-#'
 #' @return
 #' @export
 .onLoad = function(libname, pkgname) {

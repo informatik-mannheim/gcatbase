@@ -20,28 +20,6 @@ fn r_all_tuples(n: u16, sigma: Vec<String>) -> Vec<String> {
     tuples::all_tuples(n, &sigma)
 }
 
-// Example from https://www.youtube.com/watch?v=EX7YG2pmcC8
-// Talk by Claus Wilke
-struct Counter {
-    n: i32,
-}
-
-/// @export
-#[extendr]
-impl Counter {
-    fn new() -> Self {
-        Self { n: 0 }
-    }
-
-    fn increment(&mut self) {
-        self.n += 1;
-    }
-
-    fn get(&self) -> i32 {
-        self.n
-    }
-}
-
 // test.demo <- function() .Call(wrap__test_demo)
 // r_name is not yet working. Workaround in R/r_name.R:
 /// @export
@@ -58,7 +36,6 @@ pub fn test_demo() -> Vec<i32> {
 // See corresponding C code in `entrypoint.c`.
 extendr_module! {
     mod gcatbase; // like R package name
-    impl Counter;
     fn r_all_tuples;
     fn test_demo;
 }

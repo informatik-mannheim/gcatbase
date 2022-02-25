@@ -11,20 +11,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#' 
-#' @export 
+#' Get the alphabet defined by the string of vector of strings.
+#' @return List of letters.
+#' @export
 alphabet = function(s) {
   # see also Biostrings::alphabet()
   vs = as.character(unlist(sapply(s, function(si) strsplit(si, "")[[1]])))
 
   uv = unique(vs) # no duplicates
   uv = uv[order(uv)] # sorted
-  is.dna <- all(uv %in% c("A", "C", "G", "T"))
-  is.rna <- all(uv %in% c("A", "C", "G", "U"))
+  is_dna = all(uv %in% c("A", "C", "G", "T"))
+  is_rna = all(uv %in% c("A", "C", "G", "U"))
 
-  atype <- if (is.dna && is.rna) "DNA and/or RNA" else if (is.dna) "DNA" else if (is.rna) "RNA" else "unknown"
+  atype = if (is_dna && is_rna) {
+    "DNA and/or RNA"
+  } else if (is_dna) {
+    "DNA"
+  } else if (is_rna) "RNA" else "unknown"
 
-  alphabet = list(letters = uv, type = atype, is.dna = is.dna, is.rna = is.rna)
+  alphabet = list(letters = uv, type = atype, is.dna = is_dna, is.rna = is_rna)
   class(alphabet) = "gcat.alphabet"
   alphabet
 }

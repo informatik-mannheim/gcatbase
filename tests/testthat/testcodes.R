@@ -2,14 +2,14 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-#  
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License. 
+# limitations under the License.
 
 # Test file
 library(testthat)
@@ -18,8 +18,15 @@ context("codes") # Infos
 
 test_that("Code", {
   X = code(tuples = c("AUG", "GCG"), id = "A code")
-  expect_equal(attr(X, "id"), "A code")
+  expect_equal(get.id(X), "A code")
+  expect_equal(tsize(X), 3)
 })
+
+test_that("Code different tuple sizes", {
+  X = code(tuples = c("A", "CC"), id = "A code")
+  expect_equal(tsize(X), c(2, 1))
+})
+
 
 context("alphabet") # Infos
 
