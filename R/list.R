@@ -14,7 +14,7 @@
 # Functions for nested lists processing like Fasta files
 
 #' Process elements in a list and flatten the results.
-#' 
+#'
 #' @param l A list (e.g. a fasta file)
 #' @param op A function to apply on the list's entries.
 #' The function's return type must be a vector (or skalar).

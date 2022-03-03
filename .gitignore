@@ -19,5 +19,6 @@ codes.txt
 .Rproj.user
 *.Rproj
 .Rhistory
+NAMESPACE
 kill-r.bat
 /gcatase.iml
