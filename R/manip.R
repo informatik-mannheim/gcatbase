@@ -56,7 +56,7 @@ compl = function(tuples) {
     paste0(ccv, collapse = "") # vector to string again
   })
 
-  code(as.vector(s), id = paste0(get.id(tuples), "_compl"), unique.set = F, sorted.set = F) # Return as code object.
+  as.vector(s) # Strip off keys.
 }
 
 #' Reversed and complementary tuples.
@@ -74,7 +74,7 @@ rev_compl = function(tuples) {
     rcv = rev(cv) # reverse order
     paste0(rcv, collapse = "") # vector to string again
   })
-  code(as.vector(s), id = paste0(get.id(tuples), "_rev_compl"), unique.set = F, sorted.set = F) # Return as code object
+  as.vector(s)  # Strip off keys.
 }
 
 #' Split string sequence into tupels (codons).

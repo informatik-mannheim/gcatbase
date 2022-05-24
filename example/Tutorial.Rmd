@@ -239,6 +239,19 @@ Also, we can ask what amino acids are used by a code. Here the Vertebrate Mitoch
 print(amino_acids(X, numcode = 2)) # generic for amino_acids(X$tuples)
 ```
 
+Furthermore, the data frame `aa_prop` contains some important chemical properties of amino acids as published in Haig, D. and Hurst, L.D. (1991). 
+```{r}
+print(aa_prop)
+```
+
+The columns are according to the paper:
+
+ * `Polar` "Woese et al.'s (1966) polar requirement is the slope of the line that results when $$\log(1 -
+RF)/RF$$ for free amino acids is plotted against the log mole fraction of water in pyridine solvent."
+ * `Hydropathy` "Kyte and Doolittle's (1982) hydropathy is based on water-vapor transfer free energies, the interior-exterior distribution of amino acid side-chains, and the subjective judgment of the authors"
+ * `Volume` "Grantham's (1974) molecular volume of side chains is the residue volume minus a constant peptide volume. "
+ * `Isoelectric` "The values of isoelectric points were taken from Alff-Steinberger (1969)."
+
 # Operations over lists (`flatten`)
 
 Sometimes we need to perform some operations over entries in a Fasta file. For instance, we want to count the tuples in a Fasta record. First, the file is read and converted into GCAT's default representation:
@@ -289,10 +302,14 @@ print(head(freq))
 print(test.demo()) # Rust function
 ```
 
-Also possible for a code and comptiable to `rextendr`.
+Also possible for a code and compatible to `rextendr`.
 ```{r eval=F}
 X = Code$new(c("AUG"), id = "Foo")
 X$tuples
 X$tsize
 X$alphabet
 ```
+
+# References
+
+Haig, D. and Hurst, L.D. (1991) ‘A quantitative measure of error minimization in the genetic code’, Journal of Molecular Evolution, 33(5), pp. 412–417. doi:10.1007/BF02103132.

@@ -122,30 +122,30 @@ context("self complementary")
 
 test_that("complementary 1", {
   tv = "A"
-  expect_equal(as.character(compl(tv)), "T")
+  expect_equal(compl(tv), "T")
 })
 
 test_that("complementary 2", {
   tv = c("A", "G")
-  expect_equal(as.character(compl(tv)), c("T", "C"))
+  expect_equal(compl(tv), c("T", "C"))
 })
 
 test_that("self complementary single", {
   tv = "A"
-  expect_equal(as.character(rev_compl(tv)), "T")
+  expect_equal(rev_compl(tv), "T")
 })
 
 test_that("self complementary codon", {
   tv = c("TAG")
-  expect_equal(as.character(rev_compl(tv)), c("CTA"))
+  expect_equal(rev_compl(tv), c("CTA"))
 })
 
 test_that("self complementary 2 codons different size", {
   tv = c("CAG", "ATTG")
-  expect_equal(as.character(rev_compl(tv)), c("CTG", "CAAT"))
+  expect_equal(rev_compl(tv), c("CTG", "CAAT"))
 })
 
 test_that("self complementary 2 codons again", {
   tv = c("CAG", "ATT")
-  expect_equal(as.character(rev_compl(tv)), c("CTG", "AAT"))
+  expect_equal(rev_compl(tv), c("CTG", "AAT"))
 })
