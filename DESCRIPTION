@@ -1,6 +1,6 @@
 Package: gcatbase
-Title: Genetic Code Analysis Toolkit for R - Base package
-Version: 0.6.0
+Title: Genetic Code Analysis Toolkit for R - GCAT Base package (gcatbase)
+Version: 0.6.1
 Authors@R: 
     person(given = "Markus",
            family = "Gumbel",
@@ -9,9 +9,9 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Author: Markus Gumbel [aut, cre], Martin Starman [aut, cre]
 Maintainer: Markus Gumbel <m.gumbel@hs-mannheim.de>
-Depends: R (>= 3.6.0), seqinr, stringr
+Depends: R (>= 3.6.0), seqinr, stringr, rextendr (>= 0.2)
 Suggests: testthat
-Description: What the package does (one paragraph).
+Description: This package provides functions and data for the analyis of the genetic code.
 License: Apache License, Version 2.0
 Encoding: UTF-8
 LazyData: true
