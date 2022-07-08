@@ -4,7 +4,7 @@ This project contains the source code for the R version of the Genetic Code Anal
 
 ![Genetic Code Analysis Toolkit Logo](./man/resources/bio/gcat/logo.png?raw=true)
 
-# Installation
+## Installation
 `gcatbase` is available for R version 4.1 or higher. It requires a [Rust](https://www.rust-lang.org/) 1.57 (or later) compiler installed on your machine. Furthermore the current version of devtools has to be installed on your computer. If you are using Microsoft Windows, then you need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 
 A common error is that Rust does not have the target installed.
@@ -19,6 +19,10 @@ install.packages("devtools")
 devtools::install_github("/informatik-mannheim/gcatbase")
 ```
 
-# Usage
+## Usage
 
 Once you installed `gcatbase`, you may read its help pages. The file [./example/Tutorial.Rmd](./example/Tutorial.Rmd) is a good start for an introduction and a tutorial. This markdown document can be executed. The executed tutorial is available [online](https://oc.informatik.hs-mannheim.de/s/gCWxMRwfXaCcTsS/download).
+
+## Copyright and license
+
+Code and documentation copyright 2018-2022 Mannheim University of Applied Sciences. Code released under the Apache License, Version 2.0.
