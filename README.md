@@ -4,6 +4,12 @@ This project contains the source code for the R version of the Genetic Code Anal
 
 ![Genetic Code Analysis Toolkit Logo](./man/resources/bio/gcat/logo.png?raw=true)
 
+This package is part of a family of packages:
+
+ * [gcatbase](https://github.com/informatik-mannheim/gcatbase) as the base package for all other GCAT packages.
+ * [gcatcirc](https://github.com/informatik-mannheim/gcatcirc) for the analysis of circular codes.
+ * [gcatconductance](https://github.com/informatik-mannheim/gcatconductance) for the analysis of the robustness of a genetic code against point mutations.
+
 ## Installation
 `gcatbase` is available for R version 4.1 or higher. It requires a [Rust](https://www.rust-lang.org/) 1.57 (or later) compiler installed on your machine. Furthermore the current version of devtools has to be installed on your computer. If you are using Microsoft Windows, then you need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 

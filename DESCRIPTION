@@ -1,6 +1,6 @@
 Package: gcatbase
 Title: Genetic Code Analysis Toolkit for R - GCAT Base package (gcatbase)
-Version: 0.6.1
+Version: 0.6.2
 Authors@R: 
     person(given = "Markus",
            family = "Gumbel",
