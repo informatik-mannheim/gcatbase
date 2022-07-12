@@ -13,7 +13,7 @@ split(seq, tsize = 3, sep = NULL, regexp.sep = NULL)
 
 \item{sep}{Separator, e.g. ","}
 
-\item{regexp.sep}{Separator as regular expresion, e.g. "\link{, }+"}
+\item{regexp.sep}{Separator as regular expression, e.g. "[, ]+"}
 }
 \value{
 Vector of tuples. Each tuple is a string.

@@ -7,7 +7,7 @@
 \method{print}{gcat.alphabet}(alphabet)
 }
 \arguments{
-\item{alphabet}{}
+\item{alphabet}{The alphabet}
 }
 \value{
 

@@ -256,7 +256,7 @@ RF)/RF$$ for free amino acids is plotted against the log mole fraction of water 
 
 Sometimes we need to perform some operations over entries in a Fasta file. For instance, we want to count the tuples in a Fasta record. First, the file is read and converted into GCAT's default representation:
 ```{r}
-fasta = seqinr::read.fasta("../data/ena-sars.fasta", as.string = TRUE, forceDNAtolower = FALSE)
+fasta = seqinr::read.fasta("../inst/extdata/ena-sars.fasta", as.string = TRUE, forceDNAtolower = FALSE)
 ```
 
 A typical question is the frequencies of all codons in the Fasta file. The following code calculates the frequencies:
@@ -297,10 +297,6 @@ print(head(freq))
 ```
 
 # Appendix
-
-```{r}
-print(test.demo()) # Rust function
-```
 
 Also possible for a code and compatible to `rextendr`.
 ```{r eval=F}

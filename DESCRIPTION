@@ -9,8 +9,8 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Author: Markus Gumbel [aut, cre], Martin Starman [aut, cre]
 Maintainer: Markus Gumbel <m.gumbel@hs-mannheim.de>
-Depends: R (>= 3.6.0), seqinr, stringr, rextendr (>= 0.2)
-Suggests: testthat
+Depends: R (>= 3.6.0), seqinr, stringi
+Suggests: testthat, rextendr
 Description: This package provides functions and data for the analyis of the genetic code.
 License: Apache License, Version 2.0
 Encoding: UTF-8

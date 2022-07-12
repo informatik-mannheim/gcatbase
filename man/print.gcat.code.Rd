@@ -7,7 +7,7 @@
 \method{print}{gcat.code}(code)
 }
 \arguments{
-\item{code}{}
+\item{code}{The code}
 }
 \value{
 

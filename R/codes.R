@@ -53,7 +53,7 @@ get.id = function(code) {
 #' The size or sizes of a code's tuples.
 #' @param code A 'gcat.code' object
 #' @return The id of a 'gcat.code'
-#' @examples tsize(code(c("ACG", "CC"))
+#' @examples tsize(code(c("ACG", "CC")))
 #' @export
 tsize = function(code) {
   if (is.null(attr(code, "tsize"))) 0 else attr(code, "tsize")
@@ -61,7 +61,7 @@ tsize = function(code) {
 
 #' Pretty prints a code.
 #'
-#' @param code
+#' @param code The code
 #'
 #' @return
 #' @export
@@ -72,7 +72,7 @@ print.gcat.code = function(code) {
 
 #' Give a summary for a code.
 #'
-#' @param code
+#' @param code The code
 #'
 #' @return
 #' @export
@@ -134,7 +134,7 @@ read_codes = function(filename, tsize = 3,
   # TODO: stringAsFactors does not work (bug?).
   # read.csv reads factors, which are later manually converted
   # to characters.
-  A = read.csv(filename,
+  A = utils::read.csv(filename,
     skip = 1, header = FALSE, # First line is a comment.
     stringsAsFactors = FALSE,
     comment.char = "#",

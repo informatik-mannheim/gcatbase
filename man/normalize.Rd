@@ -7,13 +7,13 @@
 normalize(seqv, RNA = FALSE, lowercase = FALSE)
 }
 \arguments{
+\item{seqv}{A vector of sequences as a string to be processed.}
+
 \item{RNA}{If true, RNA bases are used, i.e. T becomes U.
 If false (default), DNA bases are used, i.e. U becomes T.}
 
 \item{lowercase}{If true, all letters are converted to lowercase (ATG -> atg).
 IF false (default), all letters will be uppercase (atg -> ATG)}
-
-\item{seq}{A vector of sequences as a string to be processed.}
 }
 \value{
 Normalized string

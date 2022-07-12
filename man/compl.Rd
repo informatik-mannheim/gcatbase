@@ -2,13 +2,18 @@
 % Please edit documentation in R/manip.R
 \name{compl}
 \alias{compl}
-\title{Complementary base.}
+\title{Complementary DNA tuples.}
 \usage{
 compl(tuples)
 }
 \arguments{
-\item{base}{b in upper case and DNA bases}
+\item{tuples}{Vector of strings where the words consists of DNA bases
+(A, T, C, G) in upper case. Invoke \code{normalize} on strings prior to call \code{compl} if needed.}
+}
+\value{
+Vector of same lengths like tuples where each tuple contains the
+complementary bases for each letter in the string. I.e. A<->T and C<->G.
 }
 \description{
-Complementary base.
+Complementary DNA tuples.
 }

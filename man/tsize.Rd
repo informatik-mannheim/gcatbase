@@ -16,5 +16,5 @@ The id of a 'gcat.code'
 The size or sizes of a code's tuples.
 }
 \examples{
-tsize(code(c("ACG", "CC"))
+tsize(code(c("ACG", "CC")))
 }

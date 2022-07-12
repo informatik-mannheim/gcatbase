@@ -36,9 +36,12 @@ shift = function(tuples, k) {
   code(as.vector(s), id = paste0(get.id(tuples), "_shifted_by_", toString(k)), unique.set = F, sorted.set = F) # Return as code object.
 }
 
-#' Complementary base.
+#' Complementary DNA tuples.
 #'
-#' @param base b in upper case and DNA bases
+#' @param tuples Vector of strings where the words consists of DNA bases
+#' (A, T, C, G) in upper case. Invoke `normalize` on strings prior to call `compl` if needed.
+#' @return Vector of same lengths like tuples where each tuple contains the
+#' complementary bases for each letter in the string. I.e. A<->T and C<->G.
 #' @export
 compl = function(tuples) {
   s = sapply(tuples, function(t) {
@@ -81,17 +84,17 @@ rev_compl = function(tuples) {
 #'
 #' A sequence can be split either by passing the parameter `tsize` or the
 #' parameter `sep`. If `sep` is set, `tsize` is ignored.
-#' 
-#' In case of `tsize` only tuples of exact this size are returned. 
+#'
+#' In case of `tsize` only tuples of exact this size are returned.
 #' If the last tuple has less than `tsize` bases it is skipped.
-#' 
-#' On the other hand, if `set` is used, all tuples are returned. There 
+#'
+#' On the other hand, if `set` is used, all tuples are returned. There
 #' is also no check if the tuples have the same size.
 #'
 #' @param seq Sequence as a string.
 #' @param tsize Tuple size. Default: 3 for codons.
 #' @param sep Separator, e.g. ","
-#' @param regexp.sep Separator as regular expresion, e.g. "[, ]+"
+#' @param regexp.sep Separator as regular expression, e.g. "\[, \]+"
 #'
 #' @return Vector of tuples. Each tuple is a string.
 #' @export
@@ -119,6 +122,7 @@ split = function(seq, tsize = 3, sep = NULL, regexp.sep = NULL) {
 #'
 #' This is useful for a frame shift.
 #'
+#' @param seq Sequence as a string to truncate.
 #' @param k Characters to truncate: 0, 1, 2, etc.
 #' @return String or sequence where k nucleotides are truncated at the beginning.
 #' @export

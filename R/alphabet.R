@@ -11,8 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#' Get the alphabet defined by the string of vector of strings.
+#' Get the alphabet defined by the letters in the string.
+#' @param s String containing all letters of the alphabet.
 #' @return List of letters.
+#' @examples 
+#' alphabet("UCAG") # Defines RNA alphabet.
+#' alphabet("ab") # Defines an alphabet of letters a and b.
 #' @export
 alphabet = function(s) {
   # see also Biostrings::alphabet()
@@ -36,7 +40,7 @@ alphabet = function(s) {
 
 #' Pretty prints an alphabet.
 #'
-#' @param alphabet
+#' @param alphabet The alphabet
 #'
 #' @return
 #' @export

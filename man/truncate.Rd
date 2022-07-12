@@ -7,6 +7,8 @@
 truncate(seq, k)
 }
 \arguments{
+\item{seq}{Sequence as a string to truncate.}
+
 \item{k}{Characters to truncate: 0, 1, 2, etc.}
 }
 \value{

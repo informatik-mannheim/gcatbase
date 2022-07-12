@@ -36,7 +36,7 @@ as.char.vector = function(s) {
 #' Normalize a nucleotide sequence. Default is DNA bases and upper-case letters.
 #'
 #' Note that unknown bases (e.g. letter K) do not raise any exceptions.
-#' @param seq A vector of sequences as a string to be processed.
+#' @param seqv A vector of sequences as a string to be processed.
 #' @param RNA If true, RNA bases are used, i.e. T becomes U.
 #' If false (default), DNA bases are used, i.e. U becomes T.
 #' @param lowercase If true, all letters are converted to lowercase (ATG -> atg).
@@ -78,9 +78,18 @@ tuples_freq = function(tuples) {
 }
 
 # Register new generic function:
+
+#' Generic function for amino acids.
+#' @param x Generic parameter
+#' @param ... Not used
 #' @export
 amino_acids = function(x, ...) UseMethod("amino_acids", x)
 
+#' Default implementation of the generic function for amino acids.
+#' It will throw an stop-exception.
+#' @param x Generic parameter
+#' @param value Generic parameter
+#' @inheritDotParams amino_acids
 #' @export
 amino_acids.default = function(x, value, ...) {
   stop("Implementation for this type not supported.")

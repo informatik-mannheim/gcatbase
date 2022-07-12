@@ -2,13 +2,20 @@
 % Please edit documentation in R/alphabet.R
 \name{alphabet}
 \alias{alphabet}
-\title{Get the alphabet defined by the string of vector of strings.}
+\title{Get the alphabet defined by the letters in the string.}
 \usage{
 alphabet(s)
+}
+\arguments{
+\item{s}{String containing all letters of the alphabet.}
 }
 \value{
 List of letters.
 }
 \description{
-Get the alphabet defined by the string of vector of strings.
+Get the alphabet defined by the letters in the string.
+}
+\examples{
+alphabet("UCAG") # Defines RNA alphabet.
+alphabet("ab") # Defines an alphabet of letters a and b.
 }
