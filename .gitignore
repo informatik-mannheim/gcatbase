@@ -10,7 +10,6 @@ Tutorial.html
 .Rbuildignore
 extendr-wrappers.R
 settings.json
-man/*.Rd
 docs
 src-i386
 src-x64
