@@ -4,14 +4,20 @@
 \alias{amino_acids.gcat.code}
 \title{Translate codons of a code into amino acids.}
 \usage{
-\method{amino_acids}{gcat.code}(code, numcode = 1)
+\method{amino_acids}{gcat.code}(x, numcode = 1, ...)
 }
 \arguments{
-\item{code}{A code with tuples of size 3.}
+\item{x}{A code with tuples of size 3.}
 
 \item{numcode}{The ncbi genetic code number for translation.
 By default the standard genetic code (1) is used.
 See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi}
+
+\item{...}{
+  Arguments passed on to \code{\link[=amino_acids]{amino_acids}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \description{
 Translate codons of a code into amino acids.

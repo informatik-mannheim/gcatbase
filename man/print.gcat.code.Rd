@@ -4,10 +4,16 @@
 \alias{print.gcat.code}
 \title{Pretty prints a code.}
 \usage{
-\method{print}{gcat.code}(code)
+\method{print}{gcat.code}(x, ...)
 }
 \arguments{
-\item{code}{The code}
+\item{x}{The code}
+
+\item{...}{
+  Arguments passed on to \code{\link[base:print]{base::print}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \value{
 

@@ -96,13 +96,14 @@ amino_acids.default = function(x, value, ...) {
 }
 
 #' Translate codons into amino acids.
-#' @param codons Vector of codons.
+#' @param x Vector of codons.
 #' @param numcode The ncbi genetic code number for translation.
 #' By default the standard genetic code (1) is used.
 #' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
+#' @inheritDotParams amino_acids
 #' @export
-amino_acids.character = function(codons, numcode = 1) {
-  aa = sapply(codons, function(codon) {
+amino_acids.character = function(x, numcode = 1, ...) {
+  aa = sapply(x, function(codon) {
     ncodon = normalize(codon, RNA = FALSE, lowercase = FALSE)
     cc = seqinr::s2c(ncodon)
     seqinr::translate(cc, numcode = numcode)

@@ -4,10 +4,16 @@
 \alias{summary.gcat.code}
 \title{Give a summary for a code.}
 \usage{
-\method{summary}{gcat.code}(code)
+\method{summary}{gcat.code}(object, ...)
 }
 \arguments{
-\item{code}{The code}
+\item{object}{The code}
+
+\item{...}{
+  Arguments passed on to \code{\link[base:summary]{base::summary}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \value{
 

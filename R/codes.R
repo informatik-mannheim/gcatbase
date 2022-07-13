@@ -61,35 +61,35 @@ tsize = function(code) {
 
 #' Pretty prints a code.
 #'
-#' @param code The code
-#'
+#' @param x The code
+#' @inheritDotParams base::print
 #' @return
 #' @export
-print.gcat.code = function(code) {
-  s = paste(get.id(code), ": ", toString(unlist(code)), sep = "")
+print.gcat.code = function(x, ...) {
+  s = paste(get.id(x), ": ", toString(unlist(x)), sep = "")
   print.default(s)
 }
 
 #' Give a summary for a code.
 #'
-#' @param code The code
-#'
+#' @param object The code
+#' @inheritDotParams base::summary
 #' @return
 #' @export
-summary.gcat.code = function(code) {
-  n = length(code)
+summary.gcat.code = function(object, ...) {
+  n = length(object)
   r = list(
-    paste0("Code: ", get.id(code)),
-    paste0(n, " tuples: ", paste(code, collapse = ", "))
+    paste0("Code: ", get.id(object)),
+    paste0(n, " tuples: ", paste(object, collapse = ", "))
   )
   cat(r[[1]])
   cat("\n")
   cat(r[[2]])
   cat("\n")
-  a = alphabet(code)
+  a = alphabet(object)
   cat(paste0("Seq-alphabet: ", toString(unlist(a$letters)), " (", a$type, ")"))
-  if (3 %in% tsize(code) && (a$is.rna || a$is.dna)) {
-    codons <- Filter(function(w) nchar(w) == 3, code)
+  if (3 %in% tsize(object) && (a$is.rna || a$is.dna)) {
+    codons <- Filter(function(w) nchar(w) == 3, object)
     aa = amino_acids(codons)
     na = length(aa)
     r[[3]] = paste0(na, " amino acids: ", paste(aa, collapse = ", "))
@@ -102,15 +102,16 @@ summary.gcat.code = function(code) {
 
 #' Translate codons of a code into amino acids.
 #'
-#' @param code A code with tuples of size 3.
+#' @param x A code with tuples of size 3.
 #' @param numcode The ncbi genetic code number for translation.
 #' By default the standard genetic code (1) is used.
 #' See https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi
+#' @inheritDotParams amino_acids
 #' @export
-amino_acids.gcat.code = function(code, numcode = 1) {
-  a <- alphabet(code)
-  if (3 %in% attr(code, "tsize") && (a$is.rna || a$is.dna)) {
-    codons <- Filter(function(w) nchar(w) == 3, code)
+amino_acids.gcat.code = function(x, numcode = 1, ...) {
+  a <- alphabet(x)
+  if (3 %in% attr(x, "tsize") && (a$is.rna || a$is.dna)) {
+    codons <- Filter(function(w) nchar(w) == 3, x)
     return(amino_acids.character(codons, numcode))
   }
 

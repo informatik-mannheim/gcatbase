@@ -4,10 +4,16 @@
 \alias{print.gcat.alphabet}
 \title{Pretty prints an alphabet.}
 \usage{
-\method{print}{gcat.alphabet}(alphabet)
+\method{print}{gcat.alphabet}(x, ...)
 }
 \arguments{
-\item{alphabet}{The alphabet}
+\item{x}{The alphabet}
+
+\item{...}{
+  Arguments passed on to \code{\link[base:print]{base::print}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \value{
 

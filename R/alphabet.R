@@ -38,13 +38,15 @@ alphabet = function(s) {
   alphabet
 }
 
+# Note: Parameter must be the same in all generic functions, here `x`.
+
 #' Pretty prints an alphabet.
 #'
-#' @param alphabet The alphabet
-#'
+#' @param x The alphabet
+#' @inheritDotParams base::print
 #' @return
 #' @export
-print.gcat.alphabet = function(alphabet) {
-  s = paste(toString(unlist(alphabet$letters)), " (", alphabet$type, ")", sep = "")
+print.gcat.alphabet = function(x, ...) {
+  s = paste(toString(unlist(x$letters)), " (", x$type, ")", sep = "")
   print.default(s)
 }
