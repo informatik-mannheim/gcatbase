@@ -22,7 +22,7 @@ nuc_bases = function() c("A", "T", "C", "G")
 #' @export
 all_tuples = function(tsize, alphabet = nuc_bases()) {
   # TODO see also seqinr::words
-  r_all_tuples(tsize, alphabet)
+  gcatbase:::r_all_tuples(tsize, alphabet)
 }
 
 #' Convert string into vector of characters.
