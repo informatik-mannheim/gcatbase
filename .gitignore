@@ -8,7 +8,6 @@
 *.nb.html
 Tutorial.html
 .Rbuildignore
-extendr-wrappers.R
 settings.json
 docs
 src-i386
