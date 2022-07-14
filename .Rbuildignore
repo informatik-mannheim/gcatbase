@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.cran-comments.md$
+^\.gitignore$
+^\.lintr$
+^\.gitattributes$
+^src/rust/target$
+^src-i386$
+^src-x64$
+^entrypoint.o$
+^gcatbase\.dll$

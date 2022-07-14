@@ -7,7 +7,6 @@
 *-tmp.*
 *.nb.html
 Tutorial.html
-.Rbuildignore
 settings.json
 docs
 src-i386
