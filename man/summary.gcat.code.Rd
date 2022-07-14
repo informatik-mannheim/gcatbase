@@ -16,7 +16,7 @@
   }}
 }
 \value{
-
+The summary
 }
 \description{
 Give a summary for a code.

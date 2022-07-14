@@ -9,10 +9,12 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Author: Markus Gumbel [aut, cre], Martin Starman [aut, cre]
 Maintainer: Markus Gumbel <m.gumbel@hs-mannheim.de>
-Depends: R (>= 3.6.0), seqinr, stringi
+Depends: R (>= 3.6.0)
+Imports: seqinr, stringr
 Suggests: testthat, rextendr
 Description: This package provides functions and data for the analyis of the genetic code.
-License: Apache License, Version 2.0
+License: Apache + file LICENSE
+URL: https://www.cammbio.hs-mannheim.de/research/software/gcatbase-r, https://github.com/informatik-mannheim/gcatbase
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

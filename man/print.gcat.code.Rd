@@ -16,7 +16,7 @@
   }}
 }
 \value{
-
+The formatted code
 }
 \description{
 Pretty prints a code.

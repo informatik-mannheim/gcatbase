@@ -9,3 +9,6 @@
 ^src-x64$
 ^entrypoint.o$
 ^gcatbase\.dll$
+\.o$
+\.so$
+\.dll$

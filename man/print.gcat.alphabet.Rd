@@ -16,7 +16,7 @@
   }}
 }
 \value{
-
+The formatted alphabet
 }
 \description{
 Pretty prints an alphabet.

@@ -63,7 +63,7 @@ tsize = function(code) {
 #'
 #' @param x The code
 #' @inheritDotParams base::print
-#' @return
+#' @return The formatted code
 #' @export
 print.gcat.code = function(x, ...) {
   s = paste(get.id(x), ": ", toString(unlist(x)), sep = "")
@@ -74,7 +74,7 @@ print.gcat.code = function(x, ...) {
 #'
 #' @param object The code
 #' @inheritDotParams base::summary
-#' @return
+#' @return The summary
 #' @export
 summary.gcat.code = function(object, ...) {
   n = length(object)
@@ -109,9 +109,9 @@ summary.gcat.code = function(object, ...) {
 #' @inheritDotParams amino_acids
 #' @export
 amino_acids.gcat.code = function(x, numcode = 1, ...) {
-  a <- alphabet(x)
+  a = alphabet(x)
   if (3 %in% attr(x, "tsize") && (a$is.rna || a$is.dna)) {
-    codons <- Filter(function(w) nchar(w) == 3, x)
+    codons = Filter(function(w) nchar(w) == 3, x)
     return(amino_acids.character(codons, numcode))
   }
 

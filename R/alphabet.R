@@ -44,7 +44,7 @@ alphabet = function(s) {
 #'
 #' @param x The alphabet
 #' @inheritDotParams base::print
-#' @return
+#' @return The formatted alphabet
 #' @export
 print.gcat.alphabet = function(x, ...) {
   s = paste(toString(unlist(x$letters)), " (", x$type, ")", sep = "")
