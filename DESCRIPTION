@@ -12,7 +12,7 @@ Maintainer: Markus Gumbel <m.gumbel@hs-mannheim.de>
 Depends: R (>= 3.6.0)
 Imports: seqinr, stringr
 Suggests: testthat, rextendr
-Description: This package provides functions and data for the analyis of the genetic code.
+Description: This package provides functions and data for the analysis of the genetic code and coding sequences.
 License: Apache + file LICENSE
 URL: https://www.cammbio.hs-mannheim.de/research/software/gcatbase-r, https://github.com/informatik-mannheim/gcatbase
 Encoding: UTF-8

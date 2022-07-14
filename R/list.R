@@ -17,7 +17,7 @@
 #'
 #' @param l A list (e.g. a fasta file)
 #' @param op A function to apply on the list's entries.
-#' The function's return type must be a vector (or skalar).
+#' The function's return type must be a vector (or scalar).
 #' @return Vector of elements.
 #' @export
 flatten = function(l, op) {

@@ -17,10 +17,10 @@ DEFAULT_ID = "unkn."
 #'
 #' @param tuples Vector of tuples or codons as strings, e.g. c("AUC", "GCA").
 #' @param id A brief description of the code. Default is "unkn.".
-#' @param unique.set A boulian value. If true, all dublicates are removed from the set.
-#' @param sorted.set A boulian value. If true, the set is sorted in alphabetical order.
+#' @param unique.set A boolean value. If true, all duplicates are removed from the set.
+#' @param sorted.set A boolean value. If true, the set is sorted in alphabetical order.
 #'
-#' @return A 'gcat.code' object. Derived from vector with two attributs: 1) id,  2) tsize.
+#' @return A 'gcat.code' object. Derived from vector with two attributes: 1) id,  2) tsize.
 #' @export
 code = function(tuples, id = DEFAULT_ID, unique.set = T, sorted.set = T) {
   code = tuples
