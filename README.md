@@ -22,7 +22,7 @@ rustup target add [YOUR_TARGET]
 Starting a new R console and run:
 ```R
 install.packages("devtools")
-devtools::install_github("/informatik-mannheim/gcatbase")
+devtools::install_github("informatik-mannheim/gcatbase")
 ```
 
 ## Usage
