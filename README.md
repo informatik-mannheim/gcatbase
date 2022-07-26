@@ -25,6 +25,12 @@ install.packages("devtools")
 devtools::install_github("informatik-mannheim/gcatbase")
 ```
 
+It might happen that the Rust package `libR-sys` won't compile. A frequent error is that it cannot detect the R major version. Please add the following R statement before invoking the installation. Note that your R version might differ from 4.2.0:
+
+```R
+Sys.setenv(LIBRSYS_R_VERSION="4.2.0")
+```
+
 ## Usage
 
 Once you installed `gcatbase`, you may read its help pages. The file [./example/Tutorial.Rmd](./example/Tutorial.Rmd) is a good start for an introduction and a tutorial. This markdown document can be executed. The executed tutorial is available [online](https://oc.informatik.hs-mannheim.de/s/gCWxMRwfXaCcTsS/download).
