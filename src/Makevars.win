@@ -1,5 +1,4 @@
 TARGET = $(subst 64,x86_64,$(subst 32,i686,$(WIN)))-pc-windows-gnu
-TARGET_DIR = ./rust/target
 LIBDIR = ./rust/target/$(TARGET)/release
 STATLIB = $(LIBDIR)/libgcatbase.a
 PKG_LIBS = -L$(LIBDIR) -lgcatcirc -lws2_32 -ladvapi32 -luserenv -lbcrypt -lntdll
